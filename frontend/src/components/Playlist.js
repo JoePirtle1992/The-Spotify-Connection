@@ -10,7 +10,8 @@ export default class Playlist extends Component {
       doesNotExist: false,
       totalOfItems: 0,
       songId: [],
-      button: false
+      resultButton: true,
+      bpmBbutton: false
     };
   }
   componentDidMount() {
@@ -61,31 +62,21 @@ export default class Playlist extends Component {
       // console.log(joinIt);
 
       this.setState({ everyBody: joinIt })
-      // console.log(joinIt.slice(0,55))
 
       if (this.state.everyBody.length === 0){
           console.log('TIS GONE!!!')
           this.setState({doesNotExist: true});
       }
       if (this.state.everyBody.length === this.state.totalOfItems){
-        console.log(this.state.everyBody);
        console.log('ALL THERE!!! :)');
-       this.setState({button: true})
-       
+       this.setState({bpmBbutton: true})
+       this.setState({resultButton: false});
       }
     })
     .catch(error => {
       console.log(error);
     });
   }
-
-incrementMe = e => {
-    const clown = e.target.value -=-100;
-    //   console.log(e.target.value++ * 100)
-    console.log(clown);
-  }
-
-
 
   getBPM = e => {
 
@@ -103,9 +94,6 @@ incrementMe = e => {
     };
 
     var injured = chunks(crap, 100);
-    // console.log(injured[0]);
-    // console.log(injured[1]);
-    // console.log(injured[2]);
 
 injured.forEach(el => 
   axios.get(`http://localhost:8888/v1/radiohead/song-info/${el}`)
@@ -114,7 +102,11 @@ injured.forEach(el =>
 //Merges The Audio Details
   var joinIt = res.data.data.audio_features.concat(...this.state.songId);
   this.setState({songId: joinIt});
-  console.log(this.state.songId);
+
+  if (this.state.songId.length === this.state.totalOfItems) {
+    this.setState({bpmBbutton: false}); //Sets the button's state back to false, which later helps prevents it from making another get request.
+    console.log('MISSION COMPRETE!!!');
+  }
 })
 .catch(error => {
   console.log(error);
@@ -143,13 +135,12 @@ injured.forEach(el =>
     if (this.state.doesNotExist === false) {
         return (
           <div>
-              {/* <button onClick={this.onClick}>{100}</button>
-              <button onClick={this.onClick}>{200}</button>
-              <button onClick={this.onClick}>{300}</button>
-              <button onClick={this.onClick}>{400}</button> */}
-            {/* <Link to={`/playlist/${this.props.match.params.id}/${0 + 100}`}>100</Link> */}
-              <button onClick={this.onClick} value={0}>Load More Results</button>
-              <button onClick={this.getBPM} value={0}>Get BPM</button>
+              {this.state.resultButton ? <button onClick={this.onClick} value={0}>Load More Results</button> : ''}
+
+
+              {/* Gives You The BPM Once Every Song Is Loaded, and then it disappears */}
+              {this.state.bpmBbutton ?<div> <h1>Get BPM</h1><button onClick={this.getBPM}>Get BPM</button></div> : ''}
+
               <button value={this.state.totalOfItems}>{this.state.totalOfItems}</button>
     
             <h1>Playlist</h1>
@@ -161,15 +152,7 @@ injured.forEach(el =>
                 <th>Song Id</th>
               </tr>
               {this.state.everyBody.map(item => (
-                // <div id="item">
-                //     <div className="info">
-                //     <h1>{item.track.name}</h1>
-                //     <p>{item.track.artists[0].name}</p>
-                //     </div>
-                //     <div className="image">
-                //     <img src={item.track.album.images[1].url} alt=""/>
-                //     </div>
-                //     </div>
+
                 <tr>
                   <td align="center">{item.track.name}</td>
                   <td>{item.track.artists[0].name}</td>

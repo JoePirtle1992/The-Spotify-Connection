@@ -38,6 +38,7 @@
 
 td {
   border: solid 2px black;
+  white-space: nowrap;
 }
 
 th {
