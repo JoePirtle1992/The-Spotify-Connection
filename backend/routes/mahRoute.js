@@ -21,6 +21,10 @@ const mahFirstController = require("../controllers/mahFirstController");
   mahFirstRoute
   .route("/playlist/:id/:offset")
   .get(mahFirstController.getTheRest)
+  
+  mahFirstRoute
+  .route("/song-info/:musicid")
+  .get(mahFirstController.musicalInfo)
 
 
 module.exports = mahFirstRoute;

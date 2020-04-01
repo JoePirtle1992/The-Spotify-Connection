@@ -99,3 +99,15 @@ exports.getTheRest = (res, req)=> {
         console.log(error);
     })
 }
+
+exports.musicalInfo = (res,req)=> {
+    axios.get(`https://api.spotify.com/v1/audio-features?ids=${res.params.musicid}`)
+    .then(function(response){
+        // console.log(req);
+        console.log(response.data);
+        req.json({message: "ABOUT TRACK", data: response.data})
+    })
+    .catch(function(error){
+        console.log(error);
+    })
+}
