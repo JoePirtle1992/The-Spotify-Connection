@@ -113,20 +113,26 @@ injured.forEach(el =>
 })
 
   );
-
-
-
-
-
-
-
-//Chunking Based Off State
-
-
-
-//     var injured = chunks(loadedImage, 100);
 }
   
+
+sortBPM = e => {
+  
+
+const sortIt = this.state.songId.sort(function(a,b) {
+  return a.energy - b.energy
+})
+
+this.setState({songId: sortIt});
+//  const daSorted = sortIt.sort();
+//  console.log(daSorted);
+
+//  const sortIt = this.state.songId.sort(item => item.energy)
+// console.log(sortIt);
+
+// this.setState({songId: daSorted});
+// console.log(this.state.songId)
+}
 
 
 
@@ -140,20 +146,22 @@ injured.forEach(el =>
 
               {/* Gives You The BPM Once Every Song Is Loaded, and then it disappears */}
               {this.state.bpmBbutton ?<div> <h1>Get BPM</h1><button onClick={this.getBPM}>Get BPM</button></div> : ''}
-
+              <button onClick={this.sortBPM}>Sort BPM</button>
               <button value={this.state.totalOfItems}>{this.state.totalOfItems}</button>
     
             <h1>Playlist</h1>
             <div id="entire-table">
             <table cellPadding="10px">
               <tr>
+                <th>Track Number</th>
                 <th>Name</th>
                 <th>Artist</th>
                 <th>Song Id</th>
               </tr>
-              {this.state.everyBody.map(item => (
+              {this.state.everyBody.map((item, index) => (
 
                 <tr>
+                  <td>{index+1}</td>
                   <td align="center">{item.track.name}</td>
                   <td>{item.track.artists[0].name}</td>
 
@@ -170,8 +178,8 @@ injured.forEach(el =>
             {
                this.state.songId.map(item => 
                <tr>
-                <td>{item.energy}</td>
-                <td>{item.loudness}</td>
+                <td className="track-energy">{item.energy}</td>
+                <td className="track-loudness">{item.loudness}</td>
                 <td>{item.danceability}</td>
                 </tr> 
                 )
