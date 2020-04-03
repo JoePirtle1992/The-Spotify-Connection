@@ -110,53 +110,147 @@ export default class Playlist extends Component {
     );
   };
 
-  // sortBPM = e => {
-  //   const sortIt = this.state.songId.sort(function(a, b) {
-  //     return a.energy - b.energy;
-  //   });
+  
+  smallestDance = e => {
+    //Super creative way to sort based off a certain value within
 
-  //   this.setState({ songId: sortIt });
-  //   //  const daSorted = sortIt.sort();
-  //   //  console.log(daSorted);
+      var pork = Array.from(document.getElementsByClassName("no"));
 
-  //   //  const sortIt = this.state.songId.sort(item => item.energy)
-  //   // console.log(sortIt);
+    //Grabs the Energy Cell
+    const japan = pork.map(perk => perk.cells[7]);
 
-  //   // this.setState({songId: daSorted});
-  // };
-  // sortLoudness = e => {
-  //   const sortIt = this.state.songId.sort(function(a, b) {
-  //     return a.loudness - b.loudness;
-  //   });
+    const son = japan.sort(function(a, b) {
+      if (a.textContent > b.textContent) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
 
-  //   this.setState({ songId: sortIt });
-  //   //  const daSorted = sortIt.sort();
-  //   //  console.log(daSorted);
+    son.forEach((el, index) => {
+      var second = pork[index]; //The First Array
+      var lucky = el.parentElement;
+      var time = lucky.cloneNode(true)
+      second.replaceWith(time)
+    });
 
-  //   //  const sortIt = this.state.songId.sort(item => item.energy)
-  //   // console.log(sortIt);
+    //This changes the track ID to match the new
+    // pork = Array.from(document.getElementsByClassName('no'))
+    // var punk = pork.map((item, index) => ( index ))
 
-  //   // this.setState({songId: daSorted});
-  //   // console.log(this.state.songId)
-  // };
+    // pork.forEach((item, index) => {
+    //   const newTrack = String(punk[index] + 1)
+    //   const boogieShoes = item.cells[0]
+    //   var clonenstein = boogieShoes.cloneNode(true)
 
-  // sortSong = e => {
-  //   // console.log(this.state.everyBody.map(a => a.track.name))
+    //   console.log(boogieShoes)
+    //   console.log(newTrack)
+    //   clonenstein.textContent = newTrack
+    // })
+    
+  };
 
-  //   const sortIt = this.state.everyBody.sort(function(a, b) {
-  //     if (a.track.name > b.track.name) {
-  //       return -1;
-  //     }
-  //     if (b.track.name < a.track.name) {
-  //       return 1;
-  //     }
-  //     return 0;
-  //   });
+  
+  largestDance = e => {
+    //Super creative way to sort based off a certain value within
 
-  //   this.setState({ everyBody: sortIt });
-  // };
+      var pork = Array.from(document.getElementsByClassName("no"));
 
-  sortBPM = e => {
+    //Grabs the Energy Cell
+    const japan = pork.map(perk => perk.cells[7]);
+
+    const son = japan.sort(function(a, b) {
+      if (a.textContent < b.textContent) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+
+    son.forEach((el, index) => {
+      var second = pork[index]; //The First Array
+      var lucky = el.parentElement;
+      var time = lucky.cloneNode(true)
+      second.replaceWith(time)
+    });
+
+
+  };
+
+
+  smallestLoudness = e => {
+    //Super creative way to sort based off a certain value within
+
+      var pork = Array.from(document.getElementsByClassName("no"));
+
+    //Grabs the Energy Cell
+    const japan = pork.map(perk => perk.cells[6]);
+
+    const son = japan.sort(function(a, b) {
+      return b.textContent - a.textContent ;
+    });
+
+    son.forEach((el, index) => {
+      var second = pork[index]; //The First Array
+      var lucky = el.parentElement;
+      var time = lucky.cloneNode(true)
+      second.replaceWith(time)
+    });
+
+
+  };
+
+
+  smallestTempo = e => {
+    //Super creative way to sort based off a certain value within
+
+      var pork = Array.from(document.getElementsByClassName("no"));
+
+    //Grabs the Energy Cell
+    const japan = pork.map(perk => perk.cells[8]);
+
+
+    
+    const son = japan.sort(function(a, b) {
+      return a.textContent - b.textContent ;
+    });
+
+    son.forEach((el, index) => {
+      var second = pork[index]; //The First Array
+      var lucky = el.parentElement;
+      var time = lucky.cloneNode(true)
+      second.replaceWith(time)
+    });
+
+
+  };
+  largestTempo = e => {
+    //Super creative way to sort based off a certain value within
+
+      var pork = Array.from(document.getElementsByClassName("no"));
+
+    //Grabs the Energy Cell
+    const japan = pork.map(perk => perk.cells[8]);
+
+
+    
+    const son = japan.sort(function(a, b) {
+      return  b.textContent  - a.textContent;
+    });
+
+    son.forEach((el, index) => {
+      var second = pork[index]; //The First Array
+      var lucky = el.parentElement;
+      var time = lucky.cloneNode(true)
+      second.replaceWith(time)
+    });
+
+
+  };
+
+
+
+  smallestBPM = e => {
     //Super creative way to sort based off a certain value within
 
       var pork = Array.from(document.getElementsByClassName("no"));
@@ -176,12 +270,59 @@ export default class Playlist extends Component {
       var second = pork[index]; //The First Array
       var lucky = el.parentElement;
       var time = lucky.cloneNode(true)
-      console.log(time.innerHTML)
       second.replaceWith(time)
     });
 
 
   };
+  largestBPM = e => {
+    //Super creative way to sort based off a certain value within
+
+      var pork = Array.from(document.getElementsByClassName("no"));
+
+    //Grabs the Energy Cell
+    const japan = pork.map(perk => perk.cells[5]);
+
+    const son = japan.sort(function(a, b) {
+      if (a.textContent > b.textContent) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+
+    son.forEach((el, index) => {
+      var second = pork[index]; //The First Array
+      var lucky = el.parentElement;
+      var time = lucky.cloneNode(true)
+      second.replaceWith(time)
+    });
+
+
+  };
+
+
+
+//PLANNED AVERAGES FOR FRONT-END
+findAverage = e => {
+  const crap = [72, 75, 78, 82, 84, 92]
+  
+  const lengthOfArray = crap.length;
+  
+  var sum = crap.reduce(function(a, b){
+          return a + b;
+      }, 0);
+  
+  var final = sum / lengthOfArray
+  
+  console.log(final)
+}
+
+
+
+
+
+
 
   render() {
     if (this.state.doesNotExist === false) {
@@ -206,12 +347,16 @@ export default class Playlist extends Component {
             ""
           )}
           <button onClick={this.sortSong}>Sort Name</button>
-          <button onClick={this.sortBPM}>Sort BPM</button>
-          <button onClick={this.sortLoudness}>Sort Loudness</button>
+          <button onClick={this.smallestBPM}>Smallest Energy</button>
+          <button onClick={this.largestBPM}>Largest Energy</button>
+          <button onClick={this.smallestLoudness}>Loudness</button>
+          <button onClick={this.smallestDance}>Smallest Dance</button>
+          <button onClick={this.largestDance}>Largest Dance</button>
+          <button onClick={this.smallestTempo}>Smallest Tempo</button>
+          <button onClick={this.largestTempo}>Largest Tempo</button>
           <button value={this.state.totalOfItems}>
             {this.state.totalOfItems}
           </button>
-          <button onClick={this.combineIt}>PACKERS!!</button>
 
           <h1>Playlist</h1>
           <div id="entire-table">
@@ -245,7 +390,7 @@ export default class Playlist extends Component {
                     <td className="track-energy">{item.energy}</td>
                     <td className="track-loudness">{item.loudness}</td>
                     <td>{item.danceability}</td>
-                    <td>{item.tempo}</td>
+                    <td>{Math.floor(item.tempo.toFixed())}</td>
                   </tr>
                 ))}
               </table>

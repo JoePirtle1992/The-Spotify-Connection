@@ -21,6 +21,7 @@ exports.callBack = (res, req) => {
     })
     
        .then(function(response){
+           console.log(response)
 
            axios({
                method: 'post',
@@ -29,6 +30,7 @@ exports.callBack = (res, req) => {
            })
     
            .then(function(response){
+               
                 axios({
                     method: 'get',
                     headers: {'Authorization': 'Bearer ' + response.data.access_token},
@@ -52,6 +54,9 @@ exports.callBack = (res, req) => {
            })
            .catch(function(error){
                console.log(error);
+               if (error){
+                   console.log('SEE IF THIS IS GONE' + response.data.refresh_token)
+               }
            })
            .catch(function(error){
                console.log(error.response)
@@ -64,6 +69,10 @@ exports.callBack = (res, req) => {
         console.log('THERE IS AN ERROR!!!!');
     })
 }
+
+// exports.redirectToken = (req, res)=>{
+
+// }
 
 exports.finally = (res, req) => {
     //Had to switch res, req to work

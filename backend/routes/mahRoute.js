@@ -10,6 +10,10 @@ const mahFirstController = require("../controllers/mahFirstController");
   .route("/callback")
   .get(mahFirstController.callBack)
 
+  // mahFirstRoute
+  // .route("/redirect-token")
+  // .get(mahFirstController.redirectToken)
+
   mahFirstRoute
   .route("/finally")
   .get(mahFirstController.finally)
@@ -25,6 +29,7 @@ const mahFirstController = require("../controllers/mahFirstController");
   mahFirstRoute
   .route("/song-info/:musicid")
   .get(mahFirstController.musicalInfo)
+
 
 
 module.exports = mahFirstRoute;
