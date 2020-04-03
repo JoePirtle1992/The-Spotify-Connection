@@ -11,7 +11,8 @@ export default class Playlist extends Component {
       totalOfItems: 0,
       songId: [],
       resultButton: true,
-      bpmBbutton: false
+      bpmBbutton: false,
+      finishedBPM: false
     };
   }
   componentDidMount() {
@@ -112,6 +113,10 @@ export default class Playlist extends Component {
               const num2 = m[index];
               num1.appendChild(num2)
             });
+            //This will overwrite that 'second' variable to be placed into it
+            n.forEach((num1) => {
+              num1.innerHTML = num1.outerHTML
+            });
           }
         })
         .catch(error => {
@@ -120,51 +125,51 @@ export default class Playlist extends Component {
     );
   };
 
-  sortBPM = e => {
-    const sortIt = this.state.songId.sort(function(a, b) {
-      return a.energy - b.energy;
-    });
+  // sortBPM = e => {
+  //   const sortIt = this.state.songId.sort(function(a, b) {
+  //     return a.energy - b.energy;
+  //   });
 
-    this.setState({ songId: sortIt });
-    //  const daSorted = sortIt.sort();
-    //  console.log(daSorted);
+  //   this.setState({ songId: sortIt });
+  //   //  const daSorted = sortIt.sort();
+  //   //  console.log(daSorted);
 
-    //  const sortIt = this.state.songId.sort(item => item.energy)
-    // console.log(sortIt);
+  //   //  const sortIt = this.state.songId.sort(item => item.energy)
+  //   // console.log(sortIt);
 
-    // this.setState({songId: daSorted});
-  };
-  sortLoudness = e => {
-    const sortIt = this.state.songId.sort(function(a, b) {
-      return a.loudness - b.loudness;
-    });
+  //   // this.setState({songId: daSorted});
+  // };
+  // sortLoudness = e => {
+  //   const sortIt = this.state.songId.sort(function(a, b) {
+  //     return a.loudness - b.loudness;
+  //   });
 
-    this.setState({ songId: sortIt });
-    //  const daSorted = sortIt.sort();
-    //  console.log(daSorted);
+  //   this.setState({ songId: sortIt });
+  //   //  const daSorted = sortIt.sort();
+  //   //  console.log(daSorted);
 
-    //  const sortIt = this.state.songId.sort(item => item.energy)
-    // console.log(sortIt);
+  //   //  const sortIt = this.state.songId.sort(item => item.energy)
+  //   // console.log(sortIt);
 
-    // this.setState({songId: daSorted});
-    // console.log(this.state.songId)
-  };
+  //   // this.setState({songId: daSorted});
+  //   // console.log(this.state.songId)
+  // };
 
-  sortSong = e => {
-    // console.log(this.state.everyBody.map(a => a.track.name))
+  // sortSong = e => {
+  //   // console.log(this.state.everyBody.map(a => a.track.name))
 
-    const sortIt = this.state.everyBody.sort(function(a, b) {
-      if (a.track.name > b.track.name) {
-        return -1;
-      }
-      if (b.track.name < a.track.name) {
-        return 1;
-      }
-      return 0;
-    });
+  //   const sortIt = this.state.everyBody.sort(function(a, b) {
+  //     if (a.track.name > b.track.name) {
+  //       return -1;
+  //     }
+  //     if (b.track.name < a.track.name) {
+  //       return 1;
+  //     }
+  //     return 0;
+  //   });
 
-    this.setState({ everyBody: sortIt });
-  };
+  //   this.setState({ everyBody: sortIt });
+  // };
 
   combineIt = e => {
     const ultimate = this.state.everyBody.concat(this.state.everyBody.songId);
@@ -210,11 +215,11 @@ export default class Playlist extends Component {
                   <th>Name</th>
                   <th>Artist</th>
                   <th>Song Id</th>
-                  <tr>
-                    <th>BPM</th>
+
+                    <th>Energy</th>
                     <th>Loudness</th>
                     <th>Danceability</th>
-                  </tr>
+                    <th>Tempo</th>
                 </tr>
 
                 {this.state.everyBody.map((item, index) => (
@@ -232,6 +237,7 @@ export default class Playlist extends Component {
                 <td className="track-energy">{item.energy}</td>
                 <td className="track-loudness">{item.loudness}</td>
                 <td>{item.danceability}</td>
+                <td>{item.tempo}</td>{}
                 </tr> 
                 )
               }
