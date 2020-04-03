@@ -27,22 +27,6 @@ export default class Playlist extends Component {
           this.setState({ doesNotExist: true });
           console.log(this.state.doesNotExist);
         }
-        //Puts BPM ON THERE (UNCOMMENT WHEN DONE)
-        //   const georgeClinton = this.state.everyBody.map(crap => crap.track.id);
-        //   const mst3k = georgeClinton.slice(0,104);
-
-        //   axios.get(`http://localhost:8888/v1/radiohead/song-info/${mst3k}`)
-        // .then(res => {
-        //   console.log(res.data.data.audio_features);
-        //   this.setState({songId: res.data.data.audio_features});
-        //   console.log(this.state.songId);
-        // })
-        // .then(error => {
-        //   console.log(error);
-        // })
-        // .catch(error => {
-        //   console.log(error);
-        // });
       });
   }
 
@@ -68,6 +52,7 @@ export default class Playlist extends Component {
           console.log("ALL THERE!!! :)");
           this.setState({ bpmBbutton: true });
           this.setState({ resultButton: false });
+          console.log(this.state.everyBody);
         }
       })
       .catch(error => {
@@ -103,20 +88,20 @@ export default class Playlist extends Component {
           if (this.state.songId.length === this.state.totalOfItems) {
             this.setState({ bpmBbutton: false }); //Sets the button's state back to false, which later helps prevents it from making another get request.
             console.log("MISSION COMPRETE!!!");
-            console.log(this.state.songId);
           }
           {
-            var n = Array.from(document.getElementsByClassName('no'));
-            var m = Array.from(document.getElementsByClassName('second'));
-            
+            var n = Array.from(document.getElementsByClassName("no"));
+            var m = Array.from(document.getElementsByClassName("second"));
+
             n.forEach((num1, index) => {
               const num2 = m[index];
-              num1.appendChild(num2)
+              num1.appendChild(num2);
             });
             //This will overwrite that 'second' variable to be placed into it
-            n.forEach((num1) => {
-              num1.innerHTML = num1.outerHTML
+            n.forEach(num1 => {
+              num1.innerHTML = num1.outerHTML;
             });
+
           }
         })
         .catch(error => {
@@ -171,9 +156,31 @@ export default class Playlist extends Component {
   //   this.setState({ everyBody: sortIt });
   // };
 
-  combineIt = e => {
-    const ultimate = this.state.everyBody.concat(this.state.everyBody.songId);
-    console.log(ultimate);
+  sortBPM = e => {
+    //Super creative way to sort based off a certain value within
+
+      var pork = Array.from(document.getElementsByClassName("no"));
+
+    //Grabs the Energy Cell
+    const japan = pork.map(perk => perk.cells[5]);
+
+    const son = japan.sort(function(a, b) {
+      if (a.textContent < b.textContent) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+
+    son.forEach((el, index) => {
+      var second = pork[index]; //The First Array
+      var lucky = el.parentElement;
+      var time = lucky.cloneNode(true)
+      console.log(time.innerHTML)
+      second.replaceWith(time)
+    });
+
+
   };
 
   render() {
@@ -215,11 +222,12 @@ export default class Playlist extends Component {
                   <th>Name</th>
                   <th>Artist</th>
                   <th>Song Id</th>
+                  <th>Release Date</th>
 
-                    <th>Energy</th>
-                    <th>Loudness</th>
-                    <th>Danceability</th>
-                    <th>Tempo</th>
+                  <th>Energy</th>
+                  <th>Loudness</th>
+                  <th>Danceability</th>
+                  <th>Tempo</th>
                 </tr>
 
                 {this.state.everyBody.map((item, index) => (
@@ -229,27 +237,26 @@ export default class Playlist extends Component {
                     <td>{item.track.artists[0].name}</td>
 
                     <td className="track-id">{item.track.id}</td>
+                    <td>{item.track.album.release_date}</td>
                   </tr>
                 ))}
-            {
-               this.state.songId.map(item => 
-               <tr class="second">
-                <td className="track-energy">{item.energy}</td>
-                <td className="track-loudness">{item.loudness}</td>
-                <td>{item.danceability}</td>
-                <td>{item.tempo}</td>{}
-                </tr> 
-                )
-              }
+                {this.state.songId.map(item => (
+                  <tr class="second">
+                    <td className="track-energy">{item.energy}</td>
+                    <td className="track-loudness">{item.loudness}</td>
+                    <td>{item.danceability}</td>
+                    <td>{item.tempo}</td>
+                  </tr>
+                ))}
               </table>
 
-{/* This deletes items...has nothing to do with code, beyond for study purposes
+              {/* This deletes items...has nothing to do with code, beyond for study purposes
 
 const removeElements = (elms) => elms.forEach(el => el.remove());
 
 removeElements( document.querySelectorAll(".second") ); */}
 
-{/* 
+              {/* 
               <table cellpadding="10px">
                   <tr>
                     <th>BPM</th>
@@ -257,8 +264,6 @@ removeElements( document.querySelectorAll(".second") ); */}
                     <th>Danceability</th>
                   </tr>
               </table> */}
-
-              
             </table>
           </div>
         </div>
